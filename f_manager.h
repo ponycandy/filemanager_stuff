@@ -108,7 +108,7 @@ QString f_Open_directory(QString directory_base="NULL")
     else
     {
         QFileDialog *fileDialog = new QFileDialog;
-        fileDialog->setDirectory(directory_base);
+        fileDialog->setDirectory(QDir(directory_base));
         fileDialog->setFileMode(QFileDialog::Directory);
         fileDialog->exec();
         auto selectDir = fileDialog->selectedFiles();
@@ -118,3 +118,4 @@ QString f_Open_directory(QString directory_base="NULL")
         }
     }
 }
+
