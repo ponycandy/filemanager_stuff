@@ -11,7 +11,7 @@ inline void f_Write_TXT_LINE(QString txtfilename,QString content,int line) ;   /
 inline void f_Add_line(QString txtfilename,QString content)   ;   // 内联声明
 inline QString f_Replacestring(QString origintexts,QString replacee,QString replacer);   // 内联声明
 inline QString f_get_text_between(QString start,QString end,QString text);
-
+inline QString f_Open_directory(QString directory_base);
 
 
 QString f_FileOpen()                 //打开文件
