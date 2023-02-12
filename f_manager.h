@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QFileDialog>
 #include <QDir>
@@ -12,6 +12,7 @@ inline void f_Add_line(QString txtfilename,QString content)   ;   // 内联声�
 inline QString f_Replacestring(QString origintexts,QString replacee,QString replacer);   // 内联声明
 inline QString f_get_text_between(QString start,QString endtext,QString text);
 inline QString f_Open_directory(QString directory_base);
+inline QString f_insert_a_line(QString origintext,int linenum,QString insertedtext);
 
 
 QString f_FileOpen()                 //打开文件
@@ -75,22 +76,22 @@ QString f_Replacestring(QString origintexts,QString replacee,QString replacer)
 }
 QString f_get_text_between(QString start,QString endtext,QString text)
 {
-     if(start=="")//从头开始截取
-        {
-            int ends=text.indexOf(endtext);
-            QString result=text.mid(0, ends);
-            return  result;
-        }
-        if(endtext=="")//截取到尾部
-        {
-            int starts=text.indexOf(start);
-            QString result=text.mid(starts+start.size());
-            return  result;
-        }
-        int starts=text.indexOf(start);
+    if(start=="")//从头开始截取
+    {
         int ends=text.indexOf(endtext);
-        QString result=text.mid(starts+1, ends-1-starts);
+        QString result=text.mid(0, ends);
         return  result;
+    }
+    if(endtext=="")//截取到尾部
+    {
+        int starts=text.indexOf(start);
+        QString result=text.mid(starts+start.size());
+        return  result;
+    }
+    int starts=text.indexOf(start);
+    int ends=text.indexOf(endtext);
+    QString result=text.mid(starts+1, ends-1-starts);
+    return  result;
 }
 QString f_Open_directory(QString directory_base="NULL")
 {
@@ -117,4 +118,17 @@ QString f_Open_directory(QString directory_base="NULL")
             return selectDir.at(0);
         }
     }
+}
+QString f_insert_a_line(QString origintext,int linenum,QString insertedtext)
+{
+    QStringList list = origintext.split("\n");//QString字符串分割函数
+    list.insert(linenum,insertedtext);
+    QString targettext;
+    targettext.clear();
+    for ( const auto& i : list  )
+    {
+        targettext.append(i+"\n");
+    }
+    qDebug()<<targettext;
+    return targettext;
 }
