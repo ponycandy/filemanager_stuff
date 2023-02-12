@@ -13,7 +13,9 @@ inline QString f_Replacestring(QString origintexts,QString replacee,QString repl
 inline QString f_get_text_between(QString start,QString endtext,QString text);
 inline QString f_Open_directory(QString directory_base);
 inline QString f_insert_a_line(QString origintext,int linenum,QString insertedtext);
-
+inline int f_get_mat_width(QString mat);
+inline int f_get_mat_height(QString mat);
+inline QString f_get_mat_at(int rows,int cols,QString mat);
 
 QString f_FileOpen()                 //打开文件
 {
@@ -131,4 +133,26 @@ QString f_insert_a_line(QString origintext,int linenum,QString insertedtext)
     }
     qDebug()<<targettext;
     return targettext;
+}
+QString f_get_mat_at(int rows,int cols,QString mat)
+{
+    QStringList list = mat.split("\n");//QString字符串分割函数
+    QString a_line=list[rows];
+    qDebug()<<a_line;
+    QStringList list1 = a_line.split(",");//QString字符串分割函数
+    return list1[cols];
+}
+int f_get_mat_height(QString mat)
+{
+    QStringList list = mat.split("\r\n");//QString字符串分割函数
+
+    return list.size();
+}
+int f_get_mat_width(QString mat)
+{
+    QStringList list = mat.split("\r\n");//QString字符串分割函数
+    QString a_line=list[0];
+    qDebug()<<a_line;
+    QStringList list1 = a_line.split(",");//QString字符串分割函数
+    return list1.size();
 }
