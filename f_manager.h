@@ -10,7 +10,7 @@ inline void f_Write_TXT(QString txtfilename,QString content);   // 内联声明
 inline void f_Write_TXT_LINE(QString txtfilename,QString content,int line) ;   // 内联声明
 inline void f_Add_line(QString txtfilename,QString content)   ;   // 内联声明
 inline QString f_Replacestring(QString origintexts,QString replacee,QString replacer);   // 内联声明
-inline QString f_get_text_between(QString start,QString end,QString text);
+inline QString f_get_text_between(QString start,QString endtext,QString text);
 inline QString f_Open_directory(QString directory_base);
 
 
@@ -75,22 +75,22 @@ QString f_Replacestring(QString origintexts,QString replacee,QString replacer)
 }
 QString f_get_text_between(QString start,QString endtext,QString text)
 {
-    if(start=="")//从头开始截取
-    {
-        int ends=text.indexOf(endtext);
-        QString result=text.mid(0, ends);
-        return  result;
-    }
-    if(endtext=="")//截取到尾部
-    {
+     if(start=="")//从头开始截取
+        {
+            int ends=text.indexOf(endtext);
+            QString result=text.mid(0, ends);
+            return  result;
+        }
+        if(endtext=="")//截取到尾部
+        {
+            int starts=text.indexOf(start);
+            QString result=text.mid(starts+start.size());
+            return  result;
+        }
         int starts=text.indexOf(start);
-        QString result=text.mid(starts+1);
+        int ends=text.indexOf(endtext);
+        QString result=text.mid(starts+1, ends-1-starts);
         return  result;
-    }
-    int starts=text.indexOf(start);
-    int ends=text.indexOf(endtext);
-    QString result=text.mid(starts+1, ends-1-starts);
-    return  result;
 }
 QString f_Open_directory(QString directory_base="NULL")
 {
@@ -118,4 +118,3 @@ QString f_Open_directory(QString directory_base="NULL")
         }
     }
 }
-
