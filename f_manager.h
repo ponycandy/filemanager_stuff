@@ -16,7 +16,7 @@ inline QString f_insert_a_line(QString origintext,int linenum,QString insertedte
 inline int f_get_mat_width(QString mat);
 inline int f_get_mat_height(QString mat);
 inline QString f_get_mat_at(int rows,int cols,QString mat);
-
+inline int f_get_line_length(QString mat,int linenum);
 QString f_FileOpen()                 //打开文件
 {
     qDebug()<<"open ";
@@ -145,13 +145,28 @@ QString f_get_mat_at(int rows,int cols,QString mat)
 int f_get_mat_height(QString mat)
 {
     QStringList list = mat.split("\r\n");//QString字符串分割函数
-
+    if(mat=="")
+    {
+        return  0;
+    }
     return list.size();
 }
 int f_get_mat_width(QString mat)
 {
-    QStringList list = mat.split("\r\n");//QString字符串分割函数
+    QStringList list = mat.split("\r\n");
     QString a_line=list[0];
+    qDebug()<<a_line;
+    QStringList list1 = a_line.split(",");
+    if(mat=="")
+    {
+        return  0;
+    }
+    return list1.size();
+}
+int f_get_line_length(QString mat,int linenum)
+{
+    QStringList list = mat.split("\n");//QString字符串分割函数
+    QString a_line=list[linenum];
     qDebug()<<a_line;
     QStringList list1 = a_line.split(",");//QString字符串分割函数
     return list1.size();
